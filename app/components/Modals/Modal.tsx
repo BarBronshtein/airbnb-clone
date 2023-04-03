@@ -58,7 +58,7 @@ const Modal: React.FC<Props> = ({
 		<div className="fixed flex overflow-x-hidden overflow-y-auto justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
 			<main className="realtive w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
 				<div
-					className={`translate duration-300 h-full ${
+					className={`translate duration-300 h-full max-h-screen ${
 						showModal ? 'translate-y-0 opcaity-100' : 'translate-y-full opcaity-0'
 					}
 					`}

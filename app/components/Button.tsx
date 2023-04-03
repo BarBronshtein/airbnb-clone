@@ -33,7 +33,7 @@ const Button: React.FC<Props> = ({
 					: 'py-3 text-md font-semibold border-[2px]'
 			}`}
 		>
-			{Icon && <Icon className="absolute left-4 top-3" />}
+			{Icon && <Icon size={24} className="absolute left-4 top-3" />}
 			{label}
 		</button>
 	);

@@ -3,13 +3,15 @@
 import axios from 'axios';
 
 import { useCallback, useState } from 'react';
-import { AiFillGithub } from 'react-icons/ai';
+import { AiFillGithub, AiFillFacebook } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import { Field, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useRegister } from '@/app/store/useRegister';
 import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../Inputs/Input';
+import { toast } from 'react-hot-toast';
+import Button from '../Button';
 
 const RegisterModal = () => {
 	const registerModal = useRegister();
@@ -28,7 +30,7 @@ const RegisterModal = () => {
 			await axios.post('/api/register', data);
 			registerModal.onClose();
 		} catch (err) {
-			console.log(err);
+			toast.error('Something went wrong, please try again later...');
 		} finally {
 			setIsLoading(false);
 		}
@@ -66,6 +68,42 @@ const RegisterModal = () => {
 		</main>
 	);
 
+	const footer = (
+		<div className="flex flex-col gap-4 mt-3">
+			<hr />
+			<Button
+				onClick={() => {}}
+				outline
+				label="Continue with Google"
+				Icon={FcGoogle}
+			/>
+			<Button
+				onClick={() => {}}
+				outline
+				label="Continue with Facebook"
+				Icon={AiFillFacebook}
+			/>
+			<Button
+				onClick={() => {}}
+				outline
+				label="Continue with Github"
+				Icon={AiFillGithub}
+			/>
+			<div className="text-neutral-500 text-center mt-4 font-light">
+				<div className="flex flex-row items-center gap-2 justify-center">
+					<p>Already have an account?</p>
+
+					<p
+						onClick={registerModal.onClose}
+						className="text-neutral-800 cursor-pointer hover:underline"
+					>
+						Log in?
+					</p>
+				</div>
+			</div>
+		</div>
+	);
+
 	return (
 		<Modal
 			disabled={isLoading}
@@ -75,6 +113,7 @@ const RegisterModal = () => {
 			onSubmit={handleSubmit(onSubmit)}
 			onClose={registerModal.onClose}
 			body={body}
+			footer={footer}
 		/>
 	);
 };

@@ -2,6 +2,8 @@ import { Nunito } from 'next/font/google';
 import Navbar from './components/Navbar/Navbar';
 import RegisterModal from './components/Modals/RegisterModal';
 import './globals.css';
+import ToasterProvider from './providers/ToasterProvider';
+import ClientSafeComponent from './components/ClientSafeComponent';
 
 export const metadata = {
 	title: 'BeMyGuest',
@@ -18,8 +20,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={font.className}>
-				<RegisterModal />
-				<Navbar />
+				<ClientSafeComponent>
+					<ToasterProvider />
+					<RegisterModal />
+					<Navbar />
+				</ClientSafeComponent>
 				{children}
 			</body>
 		</html>
