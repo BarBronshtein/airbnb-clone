@@ -1,12 +1,15 @@
 'use client';
-
+import { useRef } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
 import { useRegister } from '@/app/store/useRegister';
+import { useOnClickOutside } from '@/app/hooks/useClickOutside';
 
 const UserMenu = () => {
+	const avatarRef = useRef<HTMLDivElement>(null);
+	const itemMenuRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const registerModal = useRegister();
 
@@ -14,6 +17,11 @@ const UserMenu = () => {
 		setIsOpen(prev => !prev);
 	}, []);
 
+	const closeUserMenu = useCallback(() => {
+		setIsOpen(false);
+	}, []);
+
+	useOnClickOutside([avatarRef, itemMenuRef], closeUserMenu);
 	return (
 		<div className="relative">
 			<div className="flex flex-row items-center gap-3">
@@ -24,6 +32,7 @@ const UserMenu = () => {
 					BeMyGuest your home
 				</div>
 				<div
+					ref={avatarRef}
 					onClick={toggleOpen}
 					className="flex flex-row items-center rounded-full p-4 md:py-1 md:px-2 border-[1px] border-neutral-100  cursor-pointer transition hover:shadow-md"
 				>
@@ -35,11 +44,20 @@ const UserMenu = () => {
 			</div>
 
 			{isOpen && (
-				<div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white text-sm overflow-hidden top-12 right-0">
+				<div
+					ref={itemMenuRef}
+					className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white text-sm overflow-hidden top-12 right-0"
+				>
 					<div className="flex flex-col cursor-pointer">
 						<>
 							<MenuItem onClick={() => {}} text="login" />
-							<MenuItem onClick={registerModal.onOpen} text="Sign up" />
+							<MenuItem
+								onClick={() => {
+									registerModal.onOpen();
+									closeUserMenu();
+								}}
+								text="Sign up"
+							/>
 						</>
 					</div>
 				</div>

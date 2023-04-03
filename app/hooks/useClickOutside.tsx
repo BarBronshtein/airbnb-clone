@@ -1,13 +1,20 @@
 import { useEffect } from 'react';
 
 export const useOnClickOutside = (
-	ref: React.RefObject<HTMLElement>,
+	ref: React.RefObject<HTMLElement> | React.RefObject<HTMLElement>[],
 	handler: () => void
 ) => {
 	useEffect(() => {
 		const listener = (ev: MouseEvent | TouchEvent) => {
 			// Do nothing if clicking ref's element or descendent elements
-			if (!ref.current || ref.current.contains(ev.target as Node)) {
+			if (Array.isArray(ref)) {
+				let contains = false;
+				for (let i = 0; i < ref.length; i++) {
+					if (!ref[i].current || ref[i].current?.contains(ev.target as Node))
+						contains = true;
+				}
+				if (contains) return;
+			} else if (!ref.current || ref.current.contains(ev.target as Node)) {
 				return;
 			}
 			handler();
