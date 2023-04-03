@@ -1,4 +1,6 @@
 import { Nunito } from 'next/font/google';
+import Navbar from './components/Navbar/Navbar';
+import Modal from './components/Modals/Modal';
 import './globals.css';
 
 export const metadata = {
@@ -16,6 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={font.className}>
+				<Modal />
 				<Navbar />
 				{children}
 			</body>
