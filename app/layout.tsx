@@ -4,6 +4,8 @@ import RegisterModal from './components/Modals/RegisterModal';
 import './globals.css';
 import ToasterProvider from './providers/ToasterProvider';
 import ClientSafeComponent from './components/ClientSafeComponent';
+import LoginModal from './components/Modals/LoginModal';
+import { getCurUser } from './api/user';
 
 export const metadata = {
 	title: 'BeMyGuest',
@@ -12,18 +14,21 @@ export const metadata = {
 
 const font = Nunito({ subsets: ['latin'] });
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const curUser = await getCurUser();
+
 	return (
 		<html lang="en">
 			<body className={font.className}>
 				<ClientSafeComponent>
 					<ToasterProvider />
+					<LoginModal />
 					<RegisterModal />
-					<Navbar />
+					<Navbar user={curUser} />
 				</ClientSafeComponent>
 				{children}
 			</body>
