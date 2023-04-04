@@ -1,8 +1,20 @@
 'use client';
 
+import { useMemo } from 'react';
 import Heading from '../../Heading';
+import CountrySelect, { CountrySelectValue } from '../../Inputs/CountrySelect';
+import dynamic from 'next/dynamic';
 
-const Location = () => {
+interface Props {
+	setCustomValue: (id: string, val: any) => void;
+	location: CountrySelectValue;
+}
+
+const Location: React.FC<Props> = ({ location, setCustomValue }) => {
+	const Map = useMemo(
+		() => dynamic(() => import('../../Map'), { ssr: false }),
+		[location]
+	);
 	return (
 		<section className="flex flex-col gap-8">
 			<Heading

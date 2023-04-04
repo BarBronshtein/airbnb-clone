@@ -7,6 +7,7 @@ import Heading from '../Heading';
 import { categoires } from '../Navbar/Categories';
 import CategoryInput from '../Inputs/CategoryInput';
 import { FieldValues, useForm } from 'react-hook-form';
+import Location from './RentModalCmp/Location';
 
 enum STEPS {
 	CATEGORY,
@@ -43,6 +44,7 @@ const RentModal = () => {
 	});
 
 	const category = watch('category');
+	const location = watch('location');
 
 	const setCustomValue = (id: string, value: any) => {
 		setValue(id, value, {
@@ -89,6 +91,10 @@ const RentModal = () => {
 			</div>
 		</section>
 	);
+
+	if (step === STEPS.LOCATION) {
+		body = <Location setCustomValue={setCustomValue} location={location} />;
+	}
 
 	return (
 		<Modal
