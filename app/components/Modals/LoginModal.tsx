@@ -13,10 +13,12 @@ import Input from '../Inputs/Input';
 import { toast } from 'react-hot-toast';
 import Button from '../Button';
 import { useRouter } from 'next/navigation';
+import { useRegister } from '@/app/store/useRegister';
 
 const LoginModal = () => {
 	const router = useRouter();
-	const registerModal = useLogin();
+	const loginModal = useLogin();
+	const registerModal = useRegister();
 	const [isLoading, setIsLoading] = useState(false);
 	const {
 		register,
@@ -33,7 +35,7 @@ const LoginModal = () => {
 		if (res?.ok) {
 			toast.success('Logged in');
 			router.refresh();
-			registerModal.onClose();
+			loginModal.onClose();
 		}
 		if (res?.error) toast.error(res.error);
 	};
@@ -85,13 +87,16 @@ const LoginModal = () => {
 			/>
 			<div className="text-neutral-500 text-center mt-4 font-light">
 				<div className="flex flex-row items-center gap-2 justify-center">
-					<p>Already have an account?</p>
+					<p>First time using BeMyGuest?</p>
 
 					<p
-						onClick={registerModal.onClose}
+						onClick={() => {
+							loginModal.onClose();
+							registerModal.onOpen();
+						}}
 						className="text-neutral-800 cursor-pointer hover:underline"
 					>
-						Log in?
+						Create an account
 					</p>
 				</div>
 			</div>
@@ -101,11 +106,11 @@ const LoginModal = () => {
 	return (
 		<Modal
 			disabled={isLoading}
-			isOpen={registerModal.isOpen}
+			isOpen={loginModal.isOpen}
 			title="Login"
 			actionLabel="Continue"
 			onSubmit={handleSubmit(onSubmit)}
-			onClose={registerModal.onClose}
+			onClose={loginModal.onClose}
 			body={body}
 			footer={footer}
 		/>

@@ -5,6 +5,7 @@ import Container from '../Container';
 import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
+import Categoires from './Categories';
 
 interface Props {
 	user: SafeUser | null;
@@ -22,6 +23,7 @@ const Navbar: React.FC<Props> = ({ user }) => {
 					</div>
 				</Container>
 			</div>
+			<Categoires />
 		</nav>
 	);
 };
