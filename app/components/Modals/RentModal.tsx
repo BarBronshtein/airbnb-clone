@@ -8,6 +8,7 @@ import { categoires } from '../Navbar/Categories';
 import CategoryInput from '../Inputs/CategoryInput';
 import { FieldValues, useForm } from 'react-hook-form';
 import Location from './RentModalCmp/Location';
+import Info from './RentModalCmp/Info';
 
 enum STEPS {
 	CATEGORY,
@@ -45,6 +46,9 @@ const RentModal = () => {
 
 	const category = watch('category');
 	const location = watch('location');
+	const guestCount = watch('guestCount');
+	const roomCount = watch('roomCount');
+	const bathroomCount = watch('bathroomCount');
 
 	const setCustomValue = (id: string, value: any) => {
 		setValue(id, value, {
@@ -94,6 +98,17 @@ const RentModal = () => {
 
 	if (step === STEPS.LOCATION) {
 		body = <Location setCustomValue={setCustomValue} location={location} />;
+	}
+
+	if (step === STEPS.INFO) {
+		body = (
+			<Info
+				setCustomValue={setCustomValue}
+				bathroomCount={bathroomCount}
+				roomCount={roomCount}
+				guestCount={guestCount}
+			/>
+		);
 	}
 
 	return (
