@@ -6,6 +6,7 @@ import ToasterProvider from './providers/ToasterProvider';
 import ClientSafeComponent from './components/ClientSafeComponent';
 import LoginModal from './components/Modals/LoginModal';
 import { getCurUser } from './api/user';
+import RentModal from './components/Modals/RentModal';
 
 export const metadata = {
 	title: 'BeMyGuest',
@@ -27,6 +28,7 @@ export default async function RootLayout({
 				<ClientSafeComponent>
 					<ToasterProvider />
 					<LoginModal />
+					<RentModal />
 					<RegisterModal />
 					<Navbar user={curUser} />
 				</ClientSafeComponent>

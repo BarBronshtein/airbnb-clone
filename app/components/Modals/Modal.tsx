@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
+import { useOnClickOutside } from '@/app/hooks/useClickOutside';
 
 interface Props {
 	isOpen?: boolean;
@@ -30,6 +31,8 @@ const Modal: React.FC<Props> = ({
 	title,
 }) => {
 	const [showModal, setShowModal] = useState(isOpen);
+	const modalRef = useRef<HTMLDivElement>(null);
+
 	useEffect(() => {
 		setShowModal(isOpen);
 	}, [isOpen]);
@@ -41,6 +44,8 @@ const Modal: React.FC<Props> = ({
 			onClose();
 		}, 300);
 	}, [disabled, onClose]);
+
+	useOnClickOutside(modalRef, handleClose);
 
 	const handleSubmit = useCallback(() => {
 		if (disabled) return;
@@ -55,7 +60,7 @@ const Modal: React.FC<Props> = ({
 	if (!isOpen) return null;
 
 	return (
-		<div className="modal fixed flex overflow-x-hidden overflow-y-auto justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
+		<div className="fixed flex overflow-x-hidden overflow-y-auto justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
 			<main className="realtive w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
 				<div
 					className={`translate duration-300 h-full max-h-screen ${
@@ -63,7 +68,10 @@ const Modal: React.FC<Props> = ({
 					}
 					`}
 				>
-					<div className="relative flex flex-col bg-white outline-none w-full h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg translate focus:outline-none">
+					<div
+						ref={modalRef}
+						className="modal relative flex flex-col bg-white outline-none w-full h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg translate focus:outline-none"
+					>
 						{/* Header */}
 						<header className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
 							<button

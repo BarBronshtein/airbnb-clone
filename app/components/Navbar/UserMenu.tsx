@@ -10,6 +10,7 @@ import { useOnClickOutside } from '@/app/hooks/useClickOutside';
 import { useLogin } from '@/app/store/useLogin';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
+import { useRent } from '@/app/store/useRent';
 
 interface Props {
 	user: SafeUser | null;
@@ -18,9 +19,12 @@ interface Props {
 const UserMenu: React.FC<Props> = ({ user }) => {
 	const avatarRef = useRef<HTMLDivElement>(null);
 	const itemMenuRef = useRef<HTMLDivElement>(null);
+
 	const [isOpen, setIsOpen] = useState(false);
+
 	const registerModal = useRegister();
-	const LoginModal = useLogin();
+	const loginModal = useLogin();
+	const rentModal = useRent();
 
 	const toggleOpen = useCallback(() => {
 		setIsOpen(prev => !prev);
@@ -30,12 +34,19 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 		setIsOpen(false);
 	}, []);
 
+	const onRent = useCallback(() => {
+		if (!user) return loginModal.onOpen();
+
+		// TODO: Open rent modal
+		rentModal.onOpen();
+	}, [user, loginModal, rentModal]);
+
 	useOnClickOutside([avatarRef, itemMenuRef], closeUserMenu);
 	return (
 		<div className="relative">
 			<div className="flex flex-row items-center gap-3">
 				<div
-					onClick={() => {}}
+					onClick={onRent}
 					className="hidden md:block px-4 py-3 rounded-full text-sm font-semibold hover:bg-neutral-100 transition cursor-pointer"
 				>
 					BeMyGuest your home
@@ -64,7 +75,13 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 								<MenuItem onClick={() => {}} text="My favorites" />
 								<MenuItem onClick={() => {}} text="My reservations" />
 								<MenuItem onClick={() => {}} text="My properties" />
-								<MenuItem onClick={() => {}} text="BeMyGuest my home" />
+								<MenuItem
+									onClick={() => {
+										rentModal.onOpen();
+										closeUserMenu();
+									}}
+									text="BeMyGuest my home"
+								/>
 								<hr />
 								<MenuItem onClick={() => signOut()} text="Logout" />
 							</>
@@ -72,7 +89,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 							<>
 								<MenuItem
 									onClick={() => {
-										LoginModal.onOpen();
+										loginModal.onOpen();
 										closeUserMenu();
 									}}
 									text="Login"

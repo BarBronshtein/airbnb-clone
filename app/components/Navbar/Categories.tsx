@@ -20,7 +20,7 @@ import { IoDiamond } from 'react-icons/io5';
 import CategoryBox from './CategoryBox';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const categoires = [
+export const categoires = [
 	{
 		title: 'Beach',
 		icon: TbBeach,
