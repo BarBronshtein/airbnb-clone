@@ -117,6 +117,12 @@ const RentModal = () => {
 		body = <Images imageSrc={imageSrc} setCustomValue={setCustomValue} />;
 	}
 
+	if (step === STEPS.DESCRIPTION) {
+	}
+
+	if (step === STEPS.PRICE) {
+	}
+
 	return (
 		<Modal
 			isOpen={rentModal.isOpen}

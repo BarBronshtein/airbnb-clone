@@ -70,7 +70,7 @@ const Modal: React.FC<Props> = ({
 				>
 					<div
 						ref={modalRef}
-						className="modal relative flex flex-col bg-white outline-none w-full h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg translate focus:outline-none"
+						className="relative flex flex-col bg-white outline-none w-full h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg translate focus:outline-none"
 					>
 						{/* Header */}
 						<header className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
