@@ -8,10 +8,10 @@ import Steps from '../../STEPS/Steps';
 interface Props {
 	errors: FieldErrors<FieldValues>;
 	register: UseFormRegister<FieldValues>;
+	isLoading: boolean;
 }
 
-const Description: React.FC<Props> = ({ errors, register }) => {
-	let isLoading = false;
+const Description: React.FC<Props> = ({ errors, register, isLoading }) => {
 	return (
 		<section className="flex flex-col gap-8">
 			<Heading

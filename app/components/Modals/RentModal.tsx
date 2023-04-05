@@ -6,13 +6,17 @@ import { useRent } from '@/app/store/useRent';
 import Heading from '../Heading';
 
 import CategoryInput from '../Inputs/CategoryInput';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Location from './RentModalCmp/Location';
 import Info from './RentModalCmp/Info';
 import Images from './RentModalCmp/Images';
 import Steps from '../STEPS/Steps';
 import Category from './RentModalCmp/Category';
 import Description from './RentModalCmp/Description';
+import Price from './RentModalCmp/Price';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 enum STEPS {
 	CATEGORY,
@@ -24,8 +28,10 @@ enum STEPS {
 }
 
 const RentModal = () => {
+	const router = useRouter();
 	const rentModal = useRent();
 	const [step, setStep] = useState(STEPS.CATEGORY);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const {
 		register,
@@ -66,8 +72,31 @@ const RentModal = () => {
 	const onBack = () => {
 		setStep(value => value - 1);
 	};
+
 	const onNext = () => {
 		setStep(value => value + 1);
+	};
+
+	const onSubmit: SubmitHandler<FieldValues> = data => {
+		if (step !== STEPS.PRICE) return onNext();
+
+		setIsLoading(true);
+
+		axios
+			.post('/api/listings', data)
+			.then(() => {
+				toast.success('Listing Created!');
+				router.refresh();
+				reset();
+				setStep(STEPS.CATEGORY);
+				rentModal.onClose();
+			})
+			.catch(() => {
+				toast.error('Something went wrong.');
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	};
 
 	const actionLabel = useMemo(() => {
@@ -102,16 +131,19 @@ const RentModal = () => {
 	}
 
 	if (step === STEPS.DESCRIPTION) {
-		body = <Description errors={errors} register={register} />;
+		body = (
+			<Description errors={errors} register={register} isLoading={isLoading} />
+		);
 	}
 
 	if (step === STEPS.PRICE) {
+		body = <Price errors={errors} register={register} isLoading={isLoading} />;
 	}
 
 	return (
 		<Modal
 			isOpen={rentModal.isOpen}
-			onSubmit={onNext}
+			onSubmit={handleSubmit(onSubmit)}
 			actionLabel={actionLabel}
 			secondaryLabel={secondaryActionLabel}
 			secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
