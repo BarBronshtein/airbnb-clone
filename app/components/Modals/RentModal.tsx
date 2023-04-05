@@ -12,6 +12,7 @@ import Info from './RentModalCmp/Info';
 import Images from './RentModalCmp/Images';
 import Steps from '../STEPS/Steps';
 import Category from './RentModalCmp/Category';
+import Description from './RentModalCmp/Description';
 
 enum STEPS {
 	CATEGORY,
@@ -101,6 +102,7 @@ const RentModal = () => {
 	}
 
 	if (step === STEPS.DESCRIPTION) {
+		body = <Description errors={errors} register={register} />;
 	}
 
 	if (step === STEPS.PRICE) {

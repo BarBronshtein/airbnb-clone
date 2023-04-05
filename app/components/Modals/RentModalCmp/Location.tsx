@@ -27,6 +27,7 @@ const Location: React.FC<Props> = ({ location, setCustomValue }) => {
 				onChange={value => setCustomValue('location', value)}
 			/>
 			<Map center={location?.latlng} />
+			<hr />
 			<Steps
 				values={['Category', 'Location', 'Info', 'Images', 'Description', 'Price']}
 				curStepIdx={1}

@@ -20,6 +20,7 @@ const Images: React.FC<Props> = ({ imageSrc, setCustomValue }) => {
 				values={imageSrc}
 				onChange={value => setCustomValue('imageSrc', value)}
 			/>
+			<hr />
 			<Steps
 				values={['Category', 'Location', 'Info', 'Images', 'Description', 'Price']}
 				curStepIdx={3}

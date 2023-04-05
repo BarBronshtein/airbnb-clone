@@ -29,6 +29,7 @@ const Category: React.FC<Props> = ({ setCustomValue, category }) => {
 					</div>
 				))}
 			</div>
+			<hr />
 			<Steps
 				values={['Category', 'Location', 'Info', 'Images', 'Description', 'Price']}
 				curStepIdx={0}
