@@ -4,12 +4,14 @@ import { useMemo, useState } from 'react';
 import Modal from './Modal';
 import { useRent } from '@/app/store/useRent';
 import Heading from '../Heading';
-import { categoires } from '../Navbar/Categories';
+
 import CategoryInput from '../Inputs/CategoryInput';
 import { FieldValues, useForm } from 'react-hook-form';
 import Location from './RentModalCmp/Location';
 import Info from './RentModalCmp/Info';
 import Images from './RentModalCmp/Images';
+import Steps from '../STEPS/Steps';
+import Category from './RentModalCmp/Category';
 
 enum STEPS {
 	CATEGORY,
@@ -77,26 +79,7 @@ const RentModal = () => {
 		return 'Back';
 	}, [step]);
 
-	let body = (
-		<section className="flex flex-col gap-8">
-			<Heading
-				title="Which of these best describes your place?"
-				subtitle="Pick a category"
-			/>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
-				{categoires.map(item => (
-					<div className="col-span-1" key={item.title}>
-						<CategoryInput
-							onClick={category => setCustomValue('category', category)}
-							selected={item.title === category}
-							title={item.title}
-							icon={item.icon}
-						/>
-					</div>
-				))}
-			</div>
-		</section>
-	);
+	let body = <Category setCustomValue={setCustomValue} category={category} />;
 
 	if (step === STEPS.LOCATION) {
 		body = <Location setCustomValue={setCustomValue} location={location} />;

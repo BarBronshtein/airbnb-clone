@@ -2,6 +2,7 @@
 
 import Heading from '../../Heading';
 import Counter from '../../Inputs/Counter';
+import Steps from '../../STEPS/Steps';
 
 interface Props {
 	guestCount: number;
@@ -43,6 +44,10 @@ const Info: React.FC<Props> = ({
 				subtitle="How many bathrooms do you have?"
 			/>
 			<hr />
+			<Steps
+				values={['Category', 'Location', 'Info', 'Images', 'Description', 'Price']}
+				curStepIdx={2}
+			/>
 		</section>
 	);
 };

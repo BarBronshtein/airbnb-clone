@@ -2,6 +2,7 @@
 
 import Heading from '../../Heading';
 import ImageUpload from '../../Inputs/ImageUpload';
+import Steps from '../../STEPS/Steps';
 
 interface Props {
 	imageSrc: string[];
@@ -18,6 +19,10 @@ const Images: React.FC<Props> = ({ imageSrc, setCustomValue }) => {
 			<ImageUpload
 				values={imageSrc}
 				onChange={value => setCustomValue('imageSrc', value)}
+			/>
+			<Steps
+				values={['Category', 'Location', 'Info', 'Images', 'Description', 'Price']}
+				curStepIdx={3}
 			/>
 		</section>
 	);

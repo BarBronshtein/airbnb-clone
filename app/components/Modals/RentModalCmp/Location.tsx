@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import Heading from '../../Heading';
 import CountrySelect, { CountrySelectValue } from '../../Inputs/CountrySelect';
 import dynamic from 'next/dynamic';
+import Steps from '../../STEPS/Steps';
 
 interface Props {
 	setCustomValue: (id: string, val: any) => void;
@@ -26,6 +27,10 @@ const Location: React.FC<Props> = ({ location, setCustomValue }) => {
 				onChange={value => setCustomValue('location', value)}
 			/>
 			<Map center={location?.latlng} />
+			<Steps
+				values={['Category', 'Location', 'Info', 'Images', 'Description', 'Price']}
+				curStepIdx={1}
+			/>
 		</section>
 	);
 };

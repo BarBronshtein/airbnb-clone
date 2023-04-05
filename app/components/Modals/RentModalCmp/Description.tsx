@@ -1,6 +1,7 @@
 'use client';
 
 import Heading from '../../Heading';
+import Steps from '../../STEPS/Steps';
 
 const Description = () => {
 	return (
@@ -8,6 +9,10 @@ const Description = () => {
 			<Heading
 				title="Where is your place located?"
 				subtitle="Help guests find you!"
+			/>
+			<Steps
+				values={['Category', 'Location', 'Info', 'Images', 'Description', 'Price']}
+				curStepIdx={4}
 			/>
 		</section>
 	);
