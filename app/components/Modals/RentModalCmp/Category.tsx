@@ -4,13 +4,21 @@ import Heading from '../../Heading';
 import CategoryInput from '../../Inputs/CategoryInput';
 import Steps from '../../STEPS/Steps';
 import { categoires } from '../../Navbar/Categories';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface Props {
 	setCustomValue: (id: string, val: string) => void;
 	category: string;
+	register: UseFormRegister<FieldValues>;
+	errors: FieldErrors<FieldValues>;
 }
 
-const Category: React.FC<Props> = ({ setCustomValue, category }) => {
+const Category: React.FC<Props> = ({
+	setCustomValue,
+	category,
+	errors,
+	register,
+}) => {
 	return (
 		<section className="flex flex-col gap-8">
 			<Heading
@@ -21,6 +29,9 @@ const Category: React.FC<Props> = ({ setCustomValue, category }) => {
 				{categoires.map(item => (
 					<div className="col-span-1" key={item.title}>
 						<CategoryInput
+							required
+							register={register}
+							errors={errors}
 							onClick={category => setCustomValue('category', category)}
 							selected={item.title === category}
 							title={item.title}

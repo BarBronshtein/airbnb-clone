@@ -109,7 +109,14 @@ const RentModal = () => {
 		return 'Back';
 	}, [step]);
 
-	let body = <Category setCustomValue={setCustomValue} category={category} />;
+	let body = (
+		<Category
+			setCustomValue={setCustomValue}
+			category={category}
+			register={register}
+			errors={errors}
+		/>
+	);
 
 	if (step === STEPS.LOCATION) {
 		body = <Location setCustomValue={setCustomValue} location={location} />;
