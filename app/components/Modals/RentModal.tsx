@@ -9,6 +9,7 @@ import CategoryInput from '../Inputs/CategoryInput';
 import { FieldValues, useForm } from 'react-hook-form';
 import Location from './RentModalCmp/Location';
 import Info from './RentModalCmp/Info';
+import Images from './RentModalCmp/Images';
 
 enum STEPS {
 	CATEGORY,
@@ -49,6 +50,7 @@ const RentModal = () => {
 	const guestCount = watch('guestCount');
 	const roomCount = watch('roomCount');
 	const bathroomCount = watch('bathroomCount');
+	const imageSrc = watch('imageSrc');
 
 	const setCustomValue = (id: string, value: any) => {
 		setValue(id, value, {
@@ -109,6 +111,10 @@ const RentModal = () => {
 				guestCount={guestCount}
 			/>
 		);
+	}
+
+	if (step === STEPS.IMAGES) {
+		body = <Images imageSrc={imageSrc} setCustomValue={setCustomValue} />;
 	}
 
 	return (
