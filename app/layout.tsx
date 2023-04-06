@@ -7,6 +7,7 @@ import ClientSafeComponent from './components/ClientSafeComponent';
 import LoginModal from './components/Modals/LoginModal';
 import { getCurUser } from './api/user';
 import RentModal from './components/Modals/RentModal';
+import { useUserStore } from './store/useUserStore';
 
 export const metadata = {
 	title: 'BeMyGuest',
@@ -20,7 +21,12 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const curUser = await getCurUser();
+	const { user, setUser } = useUserStore;
+	let curUser = user;
+	if (curUser) {
+		curUser = await getCurUser();
+		setUser(curUser);
+	}
 
 	return (
 		<html lang="en">
@@ -32,7 +38,7 @@ export default async function RootLayout({
 					<RegisterModal />
 					<Navbar user={curUser} />
 				</ClientSafeComponent>
-				{children}
+				<main className="pb-20 pt-28">{children}</main>
 			</body>
 		</html>
 	);

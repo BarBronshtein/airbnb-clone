@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 			imageSrc,
 			guestCount,
 			locationValue: location.value,
-			price,
+			price: +price,
 			roomCount,
 			userId: curUser.id,
 		},
