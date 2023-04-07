@@ -23,7 +23,7 @@ const ReservationCarousel: React.FC<Props> = ({ id, imageSrc }) => {
 						fill
 						sizes="300px"
 					/>
-					<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+					<div className="absolute flex justify-between transform  -translate-y-1/2 left-5 right-5 top-1/2">
 						<a
 							href={`#slide-${id}-${i === 0 ? imageSrc.length - 1 : i - 1}`}
 							className="btn hover:bg-rose-500 btn-circle  bg-transparent border-none"
@@ -41,7 +41,7 @@ const ReservationCarousel: React.FC<Props> = ({ id, imageSrc }) => {
 			))}
 			<div className="absolute flex justify-center w-full py-2 gap-2 bottom-0 ">
 				{imageSrc.map((src, i) => (
-					<div key={`${id}-${i}`} className=" opacity-30 hover:opacity-70">
+					<div key={`${id}-${i}`} className=" opacity-20 hover:opacity-70">
 						<a href={`#slide-${id}-${i}`}>
 							<Image
 								alt="Image"
