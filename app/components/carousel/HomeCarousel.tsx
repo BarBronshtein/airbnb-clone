@@ -42,14 +42,14 @@ const HomeCarousel: React.FC<Props> = ({ imageSrc, id }) => {
 						<a
 							onClick={onPrev}
 							href={`#slide-${id}-${i === 0 ? imageSrc.length - 1 : i - 1}`}
-							className="btn hover:bg-rose-500 btn-circle bg-transparent border-none"
+							className="btn hover:bg-rose-500 btn-circle btn-sm bg-transparent border-none"
 						>
 							❮
 						</a>
 						<a
 							onClick={onNext}
 							href={`#slide-${id}-${i === imageSrc.length - 1 ? 0 : i + 1}`}
-							className="btn btn-circle hover:bg-rose-500 p-2 bg-transparent border-none"
+							className="btn btn-circle hover:bg-rose-500 p-2 btn-sm bg-transparent border-none"
 						>
 							❯
 						</a>

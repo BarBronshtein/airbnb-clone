@@ -23,7 +23,7 @@ const ListingPage = async ({ params }: { params: IParams }) => {
 		);
 	return (
 		<ClientSafeComponent>
-			<ListingClient listing={listing} user={curUser} />
+			<ListingClient listing={listing} curUser={curUser} />
 			{/* {JSON.stringify(listing)} */}
 		</ClientSafeComponent>
 	);

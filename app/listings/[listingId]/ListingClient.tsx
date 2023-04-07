@@ -1,19 +1,20 @@
 import Container from '@/app/components/Container';
 import ListingHead from '@/app/components/listings/ListingHead';
-import { titledCategories } from '@/app/services/icon.service';
+import ListingInfo from '@/app/components/listings/ListingInfo';
+import { categories } from '@/app/services/icon.service';
 import { SafeListing, SafeUser } from '@/app/types';
 import { Reservation } from '@prisma/client';
 
 interface Props {
 	reservations?: Reservation[];
 	listing: SafeListing & { user: SafeUser };
-	user?: SafeUser | null;
+	curUser?: SafeUser | null;
 }
 
-const ListingClient: React.FC<Props> = ({ listing, reservations, user }) => {
-	const category = titledCategories.find(
-		category => category === listing.category
-	);
+const ListingClient: React.FC<Props> = ({ listing, reservations, curUser }) => {
+	const category = categories.find(
+		category => category.title === listing.category
+	)!;
 
 	return (
 		<Container>
@@ -24,8 +25,19 @@ const ListingClient: React.FC<Props> = ({ listing, reservations, user }) => {
 						imageSrc={listing.imageSrc}
 						locationValue={listing.locationValue}
 						id={listing.id}
-						user={user}
+						user={curUser}
 					/>
+					<div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
+						<ListingInfo
+							user={listing.user}
+							category={category}
+							description={listing.description}
+							roomCount={listing.roomCount}
+							guestCount={listing.guestCount}
+							bathroomCount={listing.bathroomCount}
+							locationValue={listing.locationValue}
+						/>
+					</div>
 				</div>
 			</div>
 		</Container>
