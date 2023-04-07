@@ -6,6 +6,9 @@ import { Listing, Reservation } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { format } from 'date-fns';
+import HeartButton from '../HeartButton';
+import Button from '../Button';
+import HomeCarousel from '../carousel/HomeCarousel';
 
 interface Props {
 	data: Listing;
@@ -57,21 +60,35 @@ const ListningCard: React.FC<Props> = ({
 
 	return (
 		<article
-			onClick={() => router.push(`/listings/${data.id}`)}
+			// 	onClick={() => router.push(`/listings/${data.id}`)}
 			className="col-span-1 cursor-pointer group"
 		>
-			<div className="flex flex-col gap-2 w-full">
-				<div className="aspect-sqaure w-full relative overflow-hidden rounded-xl">
-					{/* Change Image to a carousel component */}
-					{/* <Image
-            fill
-						alt="Listing"
-						src={data.imageSrc}
-						className="object-cover h-full w-full group-hover:scale-110 transition"
-					/> */}
+			<div className="flex flex-col gap-2 w-full relative">
+				<div className="aspect-sqaure w-full overflow-hidden rounded-xl carousel h-[250px]">
+					<HomeCarousel imageSrc={data.imageSrc} />
+					<div className="absolute top-3 left-3">
+						<HeartButton listingId={data.id} user={user} />
+					</div>
 				</div>
 			</div>
-			{data.title}
+			<h3 className="font-semibold text-lg">
+				{location?.region}, {location?.name}
+			</h3>
+			<p className="font-light text-neutral-500">
+				{reservationDate || data.category}
+			</p>
+			<div className="flex flex-row items-center gap-1">
+				<h3 className="font-semibold">$ {price}</h3>
+				{!reservation ? <p className="font-light">night</p> : null}
+			</div>
+			{onAction && actionLabel && (
+				<Button
+					disabled={disabled}
+					small
+					label={actionLabel}
+					onClick={handleCancel}
+				/>
+			)}
 		</article>
 	);
 };

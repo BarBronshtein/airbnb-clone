@@ -21,7 +21,6 @@
 		"bcrypt": "^5.1.0",
 		"daisyui": "^2.51.5",
 		"date-fns": "^2.29.3",
-		"embla-carousel-react": "^7.1.0",
 		"eslint": "8.37.0",
 		"eslint-config-next": "13.2.4",
 		"leaflet": "^1.9.3",
