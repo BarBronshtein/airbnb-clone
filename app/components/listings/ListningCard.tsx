@@ -65,7 +65,7 @@ const ListningCard: React.FC<Props> = ({
 		>
 			<div className="flex flex-col gap-2 w-full relative">
 				<div className="aspect-sqaure w-full overflow-hidden rounded-xl carousel h-[250px]">
-					<HomeCarousel imageSrc={data.imageSrc} />
+					<HomeCarousel imageSrc={data.imageSrc} id={data.id} />
 					<div className="absolute top-3 left-3">
 						<HeartButton listingId={data.id} user={user} />
 					</div>

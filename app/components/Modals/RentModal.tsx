@@ -14,9 +14,9 @@ import Steps from '../STEPS/Steps';
 import Category from './RentModalCmp/Category';
 import Description from './RentModalCmp/Description';
 import Price from './RentModalCmp/Price';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { httpService } from '@/app/services/http.service';
 
 enum STEPS {
 	CATEGORY,
@@ -82,7 +82,7 @@ const RentModal = () => {
 
 		setIsLoading(true);
 
-		axios
+		httpService
 			.post('/api/listings', data)
 			.then(() => {
 				toast.success('Listing Created!');

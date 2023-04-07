@@ -1,7 +1,5 @@
 'use client';
 
-import axios from 'axios';
-
 import { useCallback, useState } from 'react';
 import { AiFillGithub, AiFillFacebook } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
@@ -14,6 +12,7 @@ import { toast } from 'react-hot-toast';
 import Button from '../Button';
 import { signIn } from 'next-auth/react';
 import { useLogin } from '@/app/store/useLogin';
+import { httpService } from '@/app/services/http.service';
 
 const RegisterModal = () => {
 	const registerModal = useRegister();
@@ -30,7 +29,7 @@ const RegisterModal = () => {
 	const onSubmit: SubmitHandler<FieldValues> = async data => {
 		setIsLoading(true);
 		try {
-			await axios.post('/api/register', data);
+			await httpService.post('/api/register', data);
 			registerModal.onClose();
 		} catch (err) {
 			toast.error('Something went wrong, please try again later...');
