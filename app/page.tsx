@@ -1,4 +1,4 @@
-import getListings from './api/listings';
+import { getListings } from './api/listings';
 import { getCurUser } from './api/user';
 import ClientSafeComponent from './components/ClientSafeComponent';
 import Container from './components/Container';
@@ -6,15 +6,18 @@ import EmptyState from './components/Empty';
 import ListningCard from './components/listings/ListningCard';
 import { useUserStore } from './store/useUserStore';
 
+export async function assingCurUser() {
+	const { setUser } = useUserStore;
+	const user = await getCurUser();
+	setUser(user);
+	return user;
+}
+
 export default async function Home() {
 	const listings = await getListings();
 	const { user, setUser } = useUserStore;
-	let curUser = user;
-	if (!curUser) {
-		curUser = await getCurUser();
-		setUser(curUser);
-	}
-	console.log(curUser);
+	const curUser = user || (await assingCurUser());
+
 	if (!listings.length) {
 		return (
 			<ClientSafeComponent>

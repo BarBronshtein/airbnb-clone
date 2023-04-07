@@ -12,11 +12,13 @@ const HomeCarousel: React.FC<Props> = ({ imageSrc, id }) => {
 	const status = useRef(1);
 	const showStatusRef = useRef<HTMLParagraphElement>(null);
 
-	const onNext = () => {
+	const onNext = (ev: React.MouseEvent<HTMLAnchorElement>) => {
+		ev.stopPropagation();
 		status.current = status.current === imageSrc.length ? 1 : status.current + 1;
 		showStatusRef.current!.textContent = `${status.current} / ${imageSrc.length}`;
 	};
-	const onPrev = () => {
+	const onPrev = (ev: React.MouseEvent<HTMLAnchorElement>) => {
+		ev.stopPropagation();
 		status.current = status.current === 1 ? imageSrc.length : status.current - 1;
 		showStatusRef.current!.textContent = `${status.current} / ${imageSrc.length}`;
 	};
@@ -29,7 +31,13 @@ const HomeCarousel: React.FC<Props> = ({ imageSrc, id }) => {
 					id={`slide-${id}-${i}`}
 					className="carousel-item relative w-full"
 				>
-					<Image alt="Listing" src={src} className="w-full" fill sizes="300px" />
+					<Image
+						alt="Listing"
+						src={src}
+						className="w-full object-cover"
+						fill
+						sizes="300px"
+					/>
 					<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
 						<a
 							onClick={onPrev}

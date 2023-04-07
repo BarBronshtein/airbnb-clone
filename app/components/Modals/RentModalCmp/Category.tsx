@@ -1,9 +1,10 @@
 'use client';
 
+import { categories } from '@/app/services/icon.service';
 import Heading from '../../Heading';
 import CategoryInput from '../../Inputs/CategoryInput';
 import Steps from '../../STEPS/Steps';
-import { categoires } from '../../Navbar/Categories';
+
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface Props {
@@ -26,7 +27,7 @@ const Category: React.FC<Props> = ({
 				subtitle="Pick a category"
 			/>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
-				{categoires.map(item => (
+				{categories.map(item => (
 					<div className="col-span-1" key={item.title}>
 						<CategoryInput
 							required

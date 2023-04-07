@@ -8,6 +8,7 @@ import LoginModal from './components/Modals/LoginModal';
 import { getCurUser } from './api/user';
 import RentModal from './components/Modals/RentModal';
 import { useUserStore } from './store/useUserStore';
+import { assingCurUser } from './page';
 
 export const metadata = {
 	title: 'BeMyGuest',
@@ -22,11 +23,7 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }) {
 	const { user, setUser } = useUserStore;
-	let curUser = user;
-	if (!curUser) {
-		curUser = await getCurUser();
-		setUser(curUser);
-	}
+	const curUser = user || (await assingCurUser());
 
 	return (
 		<html lang="en">
