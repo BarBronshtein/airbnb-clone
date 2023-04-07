@@ -10,11 +10,11 @@ export default async function Home() {
 	const listings = await getListings();
 	const { user, setUser } = useUserStore;
 	let curUser = user;
-	if (curUser) {
+	if (!curUser) {
 		curUser = await getCurUser();
 		setUser(curUser);
 	}
-
+	console.log(curUser);
 	if (!listings.length) {
 		return (
 			<ClientSafeComponent>
@@ -28,7 +28,7 @@ export default async function Home() {
 			<Container>
 				<div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl::grid-cols-5 2xl:grid-cols-6 gap-8">
 					{listings.map(listing => (
-						<ListningCard key={listing.id} data={listing} />
+						<ListningCard key={listing.id} data={listing} user={curUser} />
 					))}
 				</div>
 			</Container>

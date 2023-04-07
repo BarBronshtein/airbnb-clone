@@ -23,7 +23,7 @@ export default async function RootLayout({
 }) {
 	const { user, setUser } = useUserStore;
 	let curUser = user;
-	if (curUser) {
+	if (!curUser) {
 		curUser = await getCurUser();
 		setUser(curUser);
 	}

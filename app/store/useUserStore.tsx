@@ -6,16 +6,17 @@ interface UserStore {
 	logout: () => void;
 }
 
-const eventEmitter = (): UserStore => {
+function eventEmitter(): UserStore {
+	let user = null;
 	return {
-		user: null,
+		user,
 		setUser: function (user: SafeUser | null) {
-			this.user = user;
+			user = user;
 		},
 		logout: function () {
-			this.user = null;
+			user = null;
 		},
 	};
-};
+}
 
 export const useUserStore = eventEmitter();

@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { Listing, User } from '@prisma/client';
 
 export type SafeUser = Omit<
 	User,
@@ -7,3 +7,5 @@ export type SafeUser = Omit<
 
 export type AsyncReturnType<T extends (...args: any) => Promise<any>> =
 	T extends (...args: any) => Promise<infer R> ? R : any;
+
+export type SafeListing = Omit<Listing, 'createdAt'> & { createdAt: string };
