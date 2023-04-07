@@ -3,11 +3,10 @@ import ListingHead from '@/app/components/listings/ListingHead';
 import ListingInfo from '@/app/components/listings/ListingInfo';
 import ListingReservation from '@/app/components/listings/ListingReservation';
 
-import { SafeListing, SafeUser } from '@/app/types';
-import { Reservation } from '@prisma/client';
+import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
 
 interface Props {
-	reservations?: Reservation[];
+	reservations?: SafeReservation[];
 	listing: SafeListing & { user: SafeUser };
 	curUser?: SafeUser | null;
 }

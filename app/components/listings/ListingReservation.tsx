@@ -3,8 +3,7 @@
 import { Range } from 'react-date-range';
 import { httpService } from '@/app/services/http.service';
 import { useLogin } from '@/app/store/useLogin';
-import { SafeListing, SafeUser } from '@/app/types';
-import { Reservation } from '@prisma/client';
+import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
 import { differenceInCalendarDays, eachDayOfInterval } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
@@ -21,7 +20,7 @@ const initialDateRange = {
 interface Props {
 	listing: SafeListing;
 	curUser: SafeUser | null;
-	reservations: Reservation[];
+	reservations: SafeReservation[];
 }
 
 const ListingReservation: React.FC<Props> = ({
@@ -50,7 +49,7 @@ const ListingReservation: React.FC<Props> = ({
 		if (!curUser) return loginModal.onOpen();
 		setIsLoading(true);
 		httpService
-			.post('/api/reservation', {
+			.post('/api/reservations', {
 				totalPrice,
 				startDate: dateRange.startDate,
 				endDate: dateRange.endDate,
