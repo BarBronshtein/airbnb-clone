@@ -23,13 +23,11 @@ const ListingPage = async ({ params }: { params: IParams }) => {
 			</ClientSafeComponent>
 		);
 	return (
-		<ClientSafeComponent>
-			<ListingClient
-				listing={listing}
-				curUser={curUser}
-				reservations={reservations}
-			/>
-		</ClientSafeComponent>
+		<ListingClient
+			listing={listing}
+			curUser={curUser}
+			reservations={reservations}
+		/>
 	);
 };
 

@@ -11,12 +11,14 @@ import { useLogin } from '@/app/store/useLogin';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
 import { useRent } from '@/app/store/useRent';
+import { useRouter } from 'next/navigation';
 
 interface Props {
 	user: SafeUser | null;
 }
 
 const UserMenu: React.FC<Props> = ({ user }) => {
+	const router = useRouter();
 	const avatarRef = useRef<HTMLDivElement>(null);
 	const itemMenuRef = useRef<HTMLDivElement>(null);
 
@@ -71,10 +73,19 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 					<div className="flex flex-col cursor-pointer">
 						{user ? (
 							<>
-								<MenuItem onClick={() => {}} text="My trips" />
-								<MenuItem onClick={() => {}} text="My favorites" />
-								<MenuItem onClick={() => {}} text="My reservations" />
-								<MenuItem onClick={() => {}} text="My properties" />
+								<MenuItem onClick={() => router.push('/trips')} text="My trips" />
+								<MenuItem
+									onClick={() => router.push('/favorites')}
+									text="My favorites"
+								/>
+								<MenuItem
+									onClick={() => router.push('/reservations')}
+									text="My reservations"
+								/>
+								<MenuItem
+									onClick={() => router.push('/listings')}
+									text="My properties"
+								/>
 								<MenuItem
 									onClick={() => {
 										rentModal.onOpen();

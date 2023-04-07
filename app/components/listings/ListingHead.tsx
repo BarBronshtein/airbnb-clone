@@ -26,7 +26,7 @@ const ListingHead: React.FC<Props> = ({
 		<>
 			<Heading title={title} subtitle={`${location?.region}, ${location?.name}`} />
 			<div className="relative">
-				<div className="w-full h-[60vh] overflow-hidden rounded-xl">
+				<div className="w-full h-[60vh] overflow-hidden rounded-xl flex flex-row">
 					<ReservationCarousel imageSrc={imageSrc} id={id} />
 					<div className="absolute top-5 right-5">
 						<HeartButton listingId={id} user={user} />
