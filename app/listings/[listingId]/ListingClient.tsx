@@ -1,6 +1,8 @@
 import Container from '@/app/components/Container';
 import ListingHead from '@/app/components/listings/ListingHead';
 import ListingInfo from '@/app/components/listings/ListingInfo';
+import ListingReservation from '@/app/components/listings/ListingReservation';
+
 import { SafeListing, SafeUser } from '@/app/types';
 import { Reservation } from '@prisma/client';
 
@@ -10,7 +12,11 @@ interface Props {
 	curUser?: SafeUser | null;
 }
 
-const ListingClient: React.FC<Props> = ({ listing, reservations, curUser }) => {
+const ListingClient: React.FC<Props> = ({
+	listing,
+	reservations = [],
+	curUser,
+}) => {
 	return (
 		<Container>
 			<div className="max-w-screen-lg mx-auto">
@@ -32,6 +38,13 @@ const ListingClient: React.FC<Props> = ({ listing, reservations, curUser }) => {
 							bathroomCount={listing.bathroomCount}
 							locationValue={listing.locationValue}
 						/>
+						<div className="order-first mb-10 md:order-last md:col-span-3">
+							<ListingReservation
+								listing={listing}
+								reservations={reservations}
+								curUser={curUser || null}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
