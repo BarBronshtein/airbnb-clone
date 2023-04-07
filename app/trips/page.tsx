@@ -1,7 +1,7 @@
 import EmptyState from '../components/Empty';
 import ClientSafeComponent from '../components/ClientSafeComponent';
 
-import getReservation from '../api/reservations';
+import getReservations from '../api/reservations';
 import { useUserStore } from '../store/useUserStore';
 import { assingCurUser } from '../page';
 import TripsClient from './TripsClient';
@@ -17,7 +17,7 @@ const TripsPage = async () => {
 		);
 	}
 
-	const reservations = await getReservation({ userId: curUser.id });
+	const reservations = await getReservations({ userId: curUser.id });
 
 	if (!reservations.length) {
 		return (

@@ -1,5 +1,4 @@
 import prisma from '@/app/db/prismadb';
-import { getCurUser } from '../user';
 
 interface IParams {
 	listingId?: string;
@@ -7,7 +6,7 @@ interface IParams {
 	authorId?: string;
 }
 
-export default async function getReservation(params: IParams) {
+export default async function getReservations(params: IParams) {
 	const { authorId, listingId, userId } = params;
 	const query: any = {};
 	if (listingId) query.listingId = listingId;

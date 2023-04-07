@@ -30,7 +30,9 @@ const RegisterModal = () => {
 		setIsLoading(true);
 		try {
 			await httpService.post('/api/register', data);
+			toast.success('Success!');
 			registerModal.onClose();
+			loginModal.onOpen();
 		} catch (err) {
 			toast.error('Something went wrong, please try again later...');
 		} finally {
