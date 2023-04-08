@@ -9,6 +9,7 @@ import { getCurUser } from './api/user';
 import RentModal from './components/Modals/RentModal';
 import { useUserStore } from './store/useUserStore';
 import { assingCurUser } from './page';
+import SearchModal from './components/Modals/SearchModal';
 
 export const metadata = {
 	title: 'BeMyGuest',
@@ -31,6 +32,7 @@ export default async function RootLayout({
 				<ClientSafeComponent>
 					<ToasterProvider />
 					<LoginModal />
+					<SearchModal />
 					<RentModal />
 					<RegisterModal />
 					<Navbar user={curUser} />
