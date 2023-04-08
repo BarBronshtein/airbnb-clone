@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import HeartButton from '../HeartButton';
 import Button from '../Button';
 import HomeCarousel from '../carousel/HomeCarousel';
+import { utilService } from '@/app/services/util.service';
 
 interface Props {
 	data: SafeListing;
@@ -64,7 +65,10 @@ const ListningCard: React.FC<Props> = ({
 		>
 			<div className="flex flex-col gap-2 w-full relative">
 				<div className="aspect-sqaure w-full overflow-hidden rounded-xl carousel h-[250px]">
-					<HomeCarousel imageSrc={data.imageSrc} id={data.id} />
+					<HomeCarousel
+						imageSrc={data.imageSrc}
+						id={`${data.id}-${utilService.makeId()}`}
+					/>
 					<div className="absolute top-3 left-3">
 						<HeartButton listingId={data.id} user={user} />
 					</div>

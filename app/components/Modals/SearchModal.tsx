@@ -5,10 +5,12 @@ import Modal from './Modal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo, useState } from 'react';
 import { Range } from 'react-date-range';
-import dynamic from 'next/dynamic';
 import { CountrySelectValue } from '../Inputs/CountrySelect';
 import qs from 'query-string';
 import { formatISO } from 'date-fns';
+import Location from './FilterModalCmp/Location';
+import DateCmp from './FilterModalCmp/Date';
+import Info from './FilterModalCmp/Info';
 
 enum STEPS {
 	LOCATION,
@@ -31,12 +33,6 @@ const SearchModal = () => {
 		endDate: new Date(),
 		key: 'selection',
 	});
-
-	const Map = useMemo(
-		() => dynamic(() => import('../Map'), { ssr: false }),
-		[location]
-	);
-
 	const onBack = useCallback(() => {
 		setStep(val => val - 1);
 	}, []);
@@ -99,15 +95,46 @@ const SearchModal = () => {
 		return 'Back';
 	}, [step]);
 
-	let body = '';
+	let body = (
+		<Location
+			location={location as CountrySelectValue}
+			setLocation={setLocation}
+		/>
+	);
+
+	if (step === STEPS.DATE) {
+		body = (
+			<DateCmp
+				dateRange={dateRange}
+				onChange={val => setDateRange(val.selection)}
+			/>
+		);
+	}
+	if (step === STEPS.INFO) {
+		body = (
+			<Info
+				guestCount={guestCount}
+				roomCount={roomCount}
+				bathroomCount={bathroomCount}
+				setValue={{
+					guestCount: setGuestCount,
+					roomCount: setRoomCount,
+					bathroomCount: setBathroomCount,
+				}}
+			/>
+		);
+	}
 
 	return (
 		<Modal
 			isOpen={searchModal.isOpen}
 			onClose={searchModal.onClose}
-			onSubmit={searchModal.onClose}
+			onSubmit={onSubmit}
 			title="Filters"
-			actionLabel="Search"
+			actionLabel={actionLabel}
+			secondaryAction={step !== STEPS.LOCATION ? onBack : undefined}
+			secondaryLabel={secondaryActionLabel}
+			body={body}
 		/>
 	);
 };

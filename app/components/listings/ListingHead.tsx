@@ -3,6 +3,7 @@ import { SafeUser } from '@/app/types';
 import Heading from '../Heading';
 import HeartButton from '../HeartButton';
 import ReservationCarousel from '../carousel/ReservationCarousel';
+import { utilService } from '@/app/services/util.service';
 
 interface Props {
 	id: string;
@@ -27,7 +28,10 @@ const ListingHead: React.FC<Props> = ({
 			<Heading title={title} subtitle={`${location?.region}, ${location?.name}`} />
 			<div className="relative">
 				<div className="w-full h-[60vh] overflow-hidden rounded-xl flex flex-row">
-					<ReservationCarousel imageSrc={imageSrc} id={id} />
+					<ReservationCarousel
+						imageSrc={imageSrc}
+						id={`${id}-${utilService.makeId()}`}
+					/>
 					<div className="absolute top-5 right-5">
 						<HeartButton listingId={id} user={user} />
 					</div>
