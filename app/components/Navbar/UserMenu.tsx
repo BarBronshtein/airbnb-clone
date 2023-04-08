@@ -96,7 +96,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 								/>
 								<MenuItem
 									onClick={() => {
-										router.push('/listings');
+										router.push('/properties');
 										closeUserMenu();
 									}}
 									text="My properties"

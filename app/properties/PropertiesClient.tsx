@@ -3,27 +3,27 @@
 import { useRouter } from 'next/navigation';
 import Container from '../components/Container';
 import Heading from '../components/Heading';
-import { SafeReservation, SafeUser } from '../types';
+import { SafeListing, SafeUser } from '../types';
 import { useState } from 'react';
 import { httpService } from '../services/http.service';
 import { toast } from 'react-hot-toast';
 import ListningCard from '../components/listings/ListningCard';
 
 interface Props {
-	reservations: SafeReservation[];
+	listings: SafeListing[];
 	curUser: SafeUser;
 }
 
-const TripsClient: React.FC<Props> = ({ curUser, reservations }) => {
+const PropertiesClient: React.FC<Props> = ({ curUser, listings }) => {
 	const router = useRouter();
 	const [removingId, setRemovingId] = useState('');
 
 	const onCancel = (id: string) => {
 		setRemovingId(id);
 		httpService
-			.delete(`/api/reservations/${id}`)
+			.delete(`/api/listings/${id}`)
 			.then(() => {
-				toast.success('Reservation canceled');
+				toast.success('Listing deleted');
 				router.refresh();
 			})
 			.catch(err => toast.error(err?.response?.data?.error))
@@ -33,21 +33,17 @@ const TripsClient: React.FC<Props> = ({ curUser, reservations }) => {
 	return (
 		<div>
 			<Container>
-				<Heading
-					title="Trips"
-					subtitle="Where you've been and where you're going"
-				/>
+				<Heading title="Properties" subtitle="List of your properties" />
 				<div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-					{reservations.map(reservation => (
+					{listings.map(listing => (
 						<ListningCard
-							key={reservation.id}
-							data={reservation.listing}
-							reservation={reservation}
-							actionId={reservation.id}
+							key={listing.id}
+							data={listing}
+							actionId={listing.id}
 							onAction={onCancel}
-							disabled={removingId === reservation.id}
+							disabled={removingId === listing.id}
 							user={curUser}
-							actionLabel="Cancel reservation"
+							actionLabel="Delete Property"
 						/>
 					))}
 				</div>
@@ -56,4 +52,4 @@ const TripsClient: React.FC<Props> = ({ curUser, reservations }) => {
 	);
 };
 
-export default TripsClient;
+export default PropertiesClient;

@@ -1,9 +1,21 @@
 import prisma from '@/app/db/prismadb';
 import { SafeListing } from '@/app/types';
 
-export async function getListings(): Promise<SafeListing[]> {
+export interface IListingsParams {
+	userId?: string;
+}
+
+export async function getListings(
+	params: IListingsParams
+): Promise<SafeListing[]> {
 	try {
+		const userId = params;
+		let query: any = {};
+
+		if (userId) query.userId = userId;
+
 		const listings = await prisma.listing.findMany({
+			where: query,
 			orderBy: { createdAt: 'desc' },
 		});
 		return listings.map(listing => ({

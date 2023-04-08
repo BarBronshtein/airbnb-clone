@@ -1,4 +1,4 @@
-import { getListings } from './api/listings';
+import { IListingsParams, getListings } from './api/listings';
 import { getCurUser } from './api/user';
 import ClientSafeComponent from './components/ClientSafeComponent';
 import Container from './components/Container';
@@ -13,8 +13,12 @@ export async function assingCurUser() {
 	return user;
 }
 
-export default async function Home() {
-	const listings = await getListings();
+interface Props {
+	searchParams: IListingsParams;
+}
+
+export default async function Home({ searchParams }: Props) {
+	const listings = await getListings(searchParams);
 	const { user, setUser } = useUserStore;
 	const curUser = user || (await assingCurUser());
 
