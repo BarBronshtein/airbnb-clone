@@ -64,7 +64,15 @@ const ListingReservation: React.FC<Props> = ({
 				toast.error('Something went wrong');
 			})
 			.finally(() => setIsLoading(false));
-	}, [listing.id, dateRange.startDate, dateRange.endDate, totalPrice]);
+	}, [
+		listing.id,
+		dateRange.startDate,
+		dateRange.endDate,
+		totalPrice,
+		loginModal,
+		curUser,
+		router,
+	]);
 
 	const disabledDates = () => {
 		let dates: Date[] = [];

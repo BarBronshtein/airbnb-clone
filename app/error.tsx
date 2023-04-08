@@ -14,3 +14,5 @@ const ErrorState: React.FC<Props> = ({ error }) => {
 
 	return <EmptyState title="Uh Oh" subtitle="Something went wrong!" />;
 };
+
+export default ErrorState;

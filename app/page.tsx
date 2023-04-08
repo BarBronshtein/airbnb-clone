@@ -19,7 +19,7 @@ interface Props {
 
 export default async function Home({ searchParams }: Props) {
 	const listings = await getListings(searchParams);
-	const { user, setUser } = useUserStore;
+	const { user } = useUserStore;
 	const curUser = user || (await assingCurUser());
 
 	if (!listings.length) {

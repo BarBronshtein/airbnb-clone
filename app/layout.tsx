@@ -22,7 +22,7 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const { user, setUser } = useUserStore;
+	const { user } = useUserStore;
 	const curUser = user || (await assingCurUser());
 
 	return (
