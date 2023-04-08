@@ -36,3 +36,5 @@ const TripsPage = async () => {
 		</ClientSafeComponent>
 	);
 };
+
+export default TripsPage;

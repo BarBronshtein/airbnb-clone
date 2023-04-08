@@ -22,7 +22,10 @@ const TripsClient: React.FC<Props> = ({ curUser, reservations }) => {
 		setRemovingId(id);
 		httpService
 			.delete(`/api/reservation/${id}`)
-			.then(() => toast.success('Reservation canceled'))
+			.then(() => {
+				toast.success('Reservation canceled');
+				router.refresh();
+			})
 			.catch(err => toast.error(err?.response?.data?.error))
 			.finally(() => setRemovingId(''));
 	};
@@ -41,6 +44,7 @@ const TripsClient: React.FC<Props> = ({ curUser, reservations }) => {
 							data={reservation.listing}
 							reservation={reservation}
 							actionId={reservation.id}
+							onAction={onCancel}
 							disabled={removingId === reservation.id}
 							user={curUser}
 							actionLabel="Cancel reservation"
