@@ -9,7 +9,7 @@ export async function getListings(
 	params: IListingsParams
 ): Promise<SafeListing[]> {
 	try {
-		const userId = params;
+		const { userId } = params;
 		let query: any = {};
 
 		if (userId) query.userId = userId;

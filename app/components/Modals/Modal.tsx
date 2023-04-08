@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
 import { useOnClickOutside } from '@/app/hooks/useClickOutside';
+import { useOnEscapeKey } from '@/app/hooks/useEscapeKey';
 
 interface Props {
 	isOpen?: boolean;
@@ -46,7 +47,7 @@ const Modal: React.FC<Props> = ({
 	}, [disabled, onClose]);
 
 	useOnClickOutside(modalRef, handleClose);
-
+	useOnEscapeKey(handleClose);
 	const handleSubmit = useCallback(() => {
 		if (disabled) return;
 		onSubmit();

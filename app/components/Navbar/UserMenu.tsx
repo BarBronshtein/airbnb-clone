@@ -12,6 +12,7 @@ import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
 import { useRent } from '@/app/store/useRent';
 import { useRouter } from 'next/navigation';
+import { useOnEscapeKey } from '@/app/hooks/useEscapeKey';
 
 interface Props {
 	user: SafeUser | null;
@@ -44,6 +45,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 	}, [user, loginModal, rentModal]);
 
 	useOnClickOutside([avatarRef, itemMenuRef], closeUserMenu);
+	useOnEscapeKey(closeUserMenu);
 	return (
 		<div className="relative">
 			<div className="flex flex-row items-center gap-3">

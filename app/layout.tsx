@@ -5,7 +5,6 @@ import './globals.css';
 import ToasterProvider from './providers/ToasterProvider';
 import ClientSafeComponent from './components/ClientSafeComponent';
 import LoginModal from './components/Modals/LoginModal';
-import { getCurUser } from './api/user';
 import RentModal from './components/Modals/RentModal';
 import { useUserStore } from './store/useUserStore';
 import { assingCurUser } from './page';

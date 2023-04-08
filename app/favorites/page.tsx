@@ -26,3 +26,5 @@ const ListingPage = async () => {
 		</ClientSafeComponent>
 	);
 };
+
+export default ListingPage;
