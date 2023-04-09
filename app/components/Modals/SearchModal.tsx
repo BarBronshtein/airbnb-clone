@@ -4,7 +4,7 @@ import { useSearch } from '@/app/store/useSearch';
 import Modal from './Modal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo, useState } from 'react';
-import { Range } from 'react-date-range';
+import { Range, RangeKeyDict } from 'react-date-range';
 import { CountrySelectValue } from '../Inputs/CountrySelect';
 import qs from 'query-string';
 import { formatISO } from 'date-fns';
@@ -106,7 +106,8 @@ const SearchModal = () => {
 		body = (
 			<DateCmp
 				dateRange={dateRange}
-				onChange={val => setDateRange(val.selection)}
+				// @ts-ignore
+				onChange={(val: RangeKeyDict) => setDateRange(val.selection)}
 			/>
 		);
 	}
