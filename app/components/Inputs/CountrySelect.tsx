@@ -1,6 +1,7 @@
 'use client';
 
 import { useCountries } from '@/app/hooks/useCountries';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import Select from 'react-select';
 
 export type CountrySelectValue = {
@@ -14,14 +15,22 @@ export type CountrySelectValue = {
 interface Props {
 	value?: CountrySelectValue;
 	onChange: (value: CountrySelectValue) => void;
+	register?: UseFormRegister<FieldValues>;
+	errors?: FieldErrors<FieldValues>;
 }
 
-const CountrySelect: React.FC<Props> = ({ onChange, value }) => {
+const CountrySelect: React.FC<Props> = ({
+	onChange,
+	value,
+	errors,
+	register,
+}) => {
 	const { getAll } = useCountries();
 
 	return (
 		<div>
 			<Select
+				{...register?.('location', { required: true })}
 				placeholder="Anywhere"
 				isClearable
 				options={getAll()}
@@ -32,7 +41,9 @@ const CountrySelect: React.FC<Props> = ({ onChange, value }) => {
 						<div>{option.flag}</div>
 						<div>
 							{option.name},
-							<span className="text-neutral-500 ml-1">{option.region}</span>
+							<span className="text-neutral-500 ml-1 border-rose-500">
+								{option.region}
+							</span>
 						</div>
 					</div>
 				)}
@@ -44,7 +55,11 @@ const CountrySelect: React.FC<Props> = ({ onChange, value }) => {
 				theme={theme => ({
 					...theme,
 					borderRadius: 6,
-					colors: { ...theme.colors, primary: 'black', primary25: '#ffe4e6' },
+					colors: {
+						...theme.colors,
+						primary: errors?.['location'] ? '#f43f5e' : 'black',
+						primary25: '#ffe4e6',
+					},
 				})}
 			/>
 		</div>

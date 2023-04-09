@@ -119,7 +119,14 @@ const RentModal = () => {
 	);
 
 	if (step === STEPS.LOCATION) {
-		body = <Location setCustomValue={setCustomValue} location={location} />;
+		body = (
+			<Location
+				setCustomValue={setCustomValue}
+				location={location}
+				errors={errors}
+				register={register}
+			/>
+		);
 	}
 
 	if (step === STEPS.INFO) {

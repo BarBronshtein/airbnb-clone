@@ -5,13 +5,21 @@ import Heading from '../../Heading';
 import CountrySelect, { CountrySelectValue } from '../../Inputs/CountrySelect';
 import dynamic from 'next/dynamic';
 import Steps from '../../STEPS/Steps';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface Props {
 	setCustomValue: (id: string, val: any) => void;
 	location: CountrySelectValue;
+	register: UseFormRegister<FieldValues>;
+	errors: FieldErrors<FieldValues>;
 }
 
-const Location: React.FC<Props> = ({ location, setCustomValue }) => {
+const Location: React.FC<Props> = ({
+	location,
+	setCustomValue,
+	errors,
+	register,
+}) => {
 	const Map = useMemo(
 		() => dynamic(() => import('../../Map'), { ssr: false }),
 		[location]
@@ -24,6 +32,8 @@ const Location: React.FC<Props> = ({ location, setCustomValue }) => {
 			/>
 			<CountrySelect
 				value={location}
+				errors={errors}
+				register={register}
 				onChange={value => setCustomValue('location', value)}
 			/>
 			<hr />
