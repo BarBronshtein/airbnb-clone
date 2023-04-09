@@ -106,7 +106,6 @@ const SearchModal = () => {
 		body = (
 			<DateCmp
 				dateRange={dateRange}
-				// @ts-ignore
 				onChange={(val: RangeKeyDict) => setDateRange(val.selection)}
 			/>
 		);

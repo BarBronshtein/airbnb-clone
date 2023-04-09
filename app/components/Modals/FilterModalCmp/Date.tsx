@@ -1,12 +1,12 @@
 'use client';
 
-import { Range } from 'react-date-range';
+import { Range, RangeKeyDict } from 'react-date-range';
 import Heading from '../../Heading';
 import Calendar from '../../Inputs/Calendar';
 import Steps from '../../STEPS/Steps';
 
 interface Props {
-	onChange: (val: Range) => void;
+	onChange: (val: RangeKeyDict) => void;
 	dateRange: Range;
 }
 
