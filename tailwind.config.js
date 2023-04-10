@@ -6,7 +6,9 @@ module.exports = {
 		'./components/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			screens: { xs: { max: '420px' } },
+		},
 	},
 	plugins: [require('daisyui')],
 };

@@ -13,15 +13,6 @@ import SearchModal from './components/Modals/SearchModal';
 export const metadata = {
 	title: 'BeMyGuest',
 	description: 'BeMyGuest Airbnb clone',
-	icons: [
-		'favicon.ico',
-		'apple-touch-icon.png',
-		'site.webmanifest',
-		'favicon-16x16.png',
-		'favicon-32x32.png',
-		'android-chrome-192x192.png',
-		'android-chrome-512x512.png',
-	],
 };
 
 const font = Nunito({ subsets: ['latin'] });

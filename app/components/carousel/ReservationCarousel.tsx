@@ -41,13 +41,17 @@ const ReservationCarousel: React.FC<Props> = ({ id, imageSrc }) => {
 			))}
 			<div className="absolute flex justify-center w-full py-2 gap-2 bottom-0 ">
 				{imageSrc.map((src, i) => (
-					<div key={`${id}-${i}`} className=" opacity-20 hover:opacity-70">
+					<div
+						key={`${id}-${i}`}
+						className=" opacity-20 hover:opacity-70 transition"
+					>
 						<a href={`#slide-${id}-${i}`}>
 							<Image
 								alt="Image"
 								src={src}
 								width={75}
 								height={75}
+								priority
 								className="w-full object-cover rounded-sm"
 							/>
 						</a>
