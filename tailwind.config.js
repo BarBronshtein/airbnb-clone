@@ -7,8 +7,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			screens: { xs: { max: '420px' } },
+			screens: { xs: { max: '420px' }, tall: { raw: '(min-height: 800px)' } },
 		},
 	},
 	plugins: [require('daisyui')],
+	daisyui: { themes: ['light'] },
 };
