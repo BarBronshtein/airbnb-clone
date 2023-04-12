@@ -84,7 +84,7 @@ const Modal: React.FC<Props> = ({
 							<div className="text-lg font-semibold">{title}</div>
 						</header>
 						{/* Body */}
-						<section className="relative p-6 flex-auto">{body}</section>
+						<section className="relative p-6 flex-auto bg-white">{body}</section>
 						{/*footer*/}
 						<footer className="flex flex-col gap-2 p-6 bg-white rounded-b">
 							<div className="flex flex-row items-center gap-4 w-full">

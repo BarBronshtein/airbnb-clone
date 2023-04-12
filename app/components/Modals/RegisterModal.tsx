@@ -76,19 +76,19 @@ const RegisterModal = () => {
 		<div className="flex flex-col gap-4 mt-3">
 			<hr />
 			<Button
-				onClick={() => signIn('google')}
+				onClick={() => signIn('google').catch(toast.error)}
 				outline
 				label="Continue with Google"
 				Icon={FcGoogle}
 			/>
 			<Button
-				onClick={() => signIn('facebook')}
+				onClick={() => signIn('facebook').catch(toast.error)}
 				outline
 				label="Continue with Facebook"
 				Icon={AiFillFacebook}
 			/>
 			<Button
-				onClick={() => signIn('github')}
+				onClick={() => signIn('github').catch(toast.error)}
 				outline
 				label="Continue with Github"
 				Icon={AiFillGithub}
